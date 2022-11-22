@@ -1,4 +1,6 @@
 import random
+import os
+import sys
 
 
 board = ["-", "-", "-",
@@ -68,16 +70,23 @@ def checkIfWin(board):
         printBoard(board)
         print(f"The winner is {winner}!")
         gameRunning = False
+        return True
+    
 
     elif checkRow(board):
         printBoard(board)
         print(f"The winner is {winner}!")
         gameRunning = False
+        return True
 
     elif checkDiag(board):
         printBoard(board)
         print(f"The winner is {winner}!")
         gameRunning = False
+        return True
+
+    return False
+        
 
 
 def checkIfTie(board):
@@ -86,6 +95,8 @@ def checkIfTie(board):
         printBoard(board)
         print("It is a tie!")
         gameRunning = False
+        return True
+    return False
 
 
 # switch player
@@ -108,11 +119,16 @@ def computer(board):
 while gameRunning:
     printBoard(board)
     playerInput(board)
-    checkIfWin(board)
-    checkIfTie(board)
+    if checkIfWin(board):
+        break
+    if checkIfTie(board):
+        break
     switchPlayer()
     computer(board)
-    checkIfWin(board)
-    checkIfTie(board)
+    if checkIfWin(board):
+        break
+    if checkIfTie(board):
+        break
+    os.system("clear")
 
 
